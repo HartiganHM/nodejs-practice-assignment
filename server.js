@@ -9,6 +9,19 @@ let messages = [
   { 'id': 4, 'user': 'Juniper \'Juni\' Fargnoli', 'message': 'Squirrel? AHHHHHH!! RAAA-BRRAAAA!!!' }
 ]
 
+const getAllMessages = (response) => {
+  response.writeHead(200, { 'Content-Type': 'text/plain' });
+  response.write(messages);
+  response.end();
+}
+
+const addMessage = (newMessage, response) => {
+  messages = [...messages, newMessage];
+  response.writeHead(201, { 'Content-Type': 'text-plain' });
+  response.write(newMessage);
+  response.end();
+}
+
 server.listen(3000, () => {
   console.log('The HTTP server is listening at Port 3000.');
 })
