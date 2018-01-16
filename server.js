@@ -16,6 +16,7 @@ const getAllMessages = (response) => {
 }
 
 const addMessage = (newMessage, response) => {
+  messages = [...messages, newMessage];
   response.writeHead(201, { 'Content-Type': 'text/plain' });
   response.write(newMessage);
   response.end();
