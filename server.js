@@ -18,7 +18,7 @@ const getAllMessages = (response) => {
 const addMessage = (newMessage, response) => {
   messages = [...messages, newMessage];
   response.writeHead(201, { 'Content-Type': 'text/plain' });
-  response.write(newMessage);
+  response.write(JSON.stringify(newMessage));
   response.end();
 }
 
@@ -31,7 +31,6 @@ server.on('request', (request, response) => {
     getAllMessages(response);
   } else if (request.method === 'POST') {
     let newMessage = { 'id': new Date() };
-
     request.on('data', (data) => {
       newMessage = Object.assign(newMessage, JSON.parse(data));
     });
