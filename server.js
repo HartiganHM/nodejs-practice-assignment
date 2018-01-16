@@ -11,13 +11,12 @@ let messages = [
 
 const getAllMessages = (response) => {
   response.writeHead(200, { 'Content-Type': 'text/plain' });
-  response.write(messages);
+  response.write(JSON.stringify(messages));
   response.end();
 }
 
 const addMessage = (newMessage, response) => {
-  messages = [...messages, newMessage];
-  response.writeHead(201, { 'Content-Type': 'text-plain' });
+  response.writeHead(201, { 'Content-Type': 'text/plain' });
   response.write(newMessage);
   response.end();
 }
@@ -36,7 +35,7 @@ server.on('request', (request, response) => {
       newMessage = Object.assign(newMessage, JSON.parse(data));
     });
 
-    request.on('end' () => {
+    request.on('end', () => {
       addMessage(newMessage, response);
     });
   }
